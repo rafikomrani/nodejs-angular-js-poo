@@ -42,6 +42,7 @@ $scope.user=response.data.user[0];
 	 }
 	 $scope.modifier=function(){
     if($scope.user.verif()) return alert('veuillez compléte tous les informations');
+    if($scope.user.compare($scope.users[$scope.index])) return alert('vous ne faites pas un changement !');
 	 	$http.post('http://localhost:3000/updateuser',$scope.user).then(function(response){
 
        $scope.users[$scope.index]=response.data.user;

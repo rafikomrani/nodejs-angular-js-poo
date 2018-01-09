@@ -1,4 +1,5 @@
 	 class User{
+	 	
 		constructor(){
 			this.id=null;
 			this.nom="";
@@ -21,5 +22,10 @@
 		verif(){
 			if(this.nom==""||this.prenom=="") return true;
 			else return false;
+		}
+		compare(data){
+			if(this.nom==data.nom && this.prenom==data.prenom)
+				return true;
+				 else return false;
 		}
 	}
