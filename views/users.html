@@ -1,0 +1,34 @@
+<div class="col-md-12" ng-controller="ctr" ng-init="load()">
+	<div class="col-md-offset-2 col-md-8">
+<form class="form form-horizontal">
+	<div class="form-group">
+		<label class="col-sm-3">nom</label>
+		<div class="col-sm-8">
+			<input class="form-control" type="text" ng-model="user.nom" name="nom">
+		</div>
+	</div>
+	<div class="form-group">
+		<label class="col-sm-3">prenom</label>
+		<div class="col-sm-8">
+			<input class="form-control" type="text" ng-model="user.prenom" name="prenom">
+		</div>
+	</div>
+
+	<div class="form-group">
+		<div class="col-sm-12">
+			<button class="btn btn-primary" type="button" ng-disabled="index!=null" ng-click="post()"><i class="fa fa-save"> Ajouter</i></button>
+			<button class="btn btn-default" type="button" ng-click="new()"><i class="fa fa-plus"> Nouveau</i> </button>
+			<button class="btn btn-danger" type="button" ng-disabled="index==null" ng-click="delete()"><i class="fa fa-trash-o"> Supprimer</i></button>
+
+			<button class="btn btn-success" type="button" ng-disabled="index==null" ng-click="modifier()"><i class="fa fa-pencil"> Modifier</i> </button>
+		</div>
+		
+	</div>
+	
+</form>
+<table class="table table-bordered">
+	<tr><td>nom</td><td>prenom</td><td>Profil</td></tr>
+	<tr ng-repeat="u in users" ng-class="{'selected':index==$index}" ng-click="affect($index)"><td>{{u.nom}}</td><td>{{u.prenom}}</td><td><a href="profil/{{u.id}}"><button class="btn btn-dark"><i class="fa fa-search"> Voir</i></button></a></td></tr>
+</table>
+</div>
+</div>
