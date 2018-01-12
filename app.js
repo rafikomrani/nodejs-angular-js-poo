@@ -1,5 +1,7 @@
-const express = require('express')
+const express = require('express');
 const app = express();
+const server = require('http').createServer(app);
+  const  io = require('socket.io').listen(server);
 var bodyParser = require('body-parser');
 app.use(bodyParser.json()); // support json encoded bodies
 app.use(bodyParser.urlencoded({ extended: true })); // support encoded bodies
@@ -14,7 +16,14 @@ app.use('/model', express.static(__dirname + '/model'));
 
  const Routes=require('./Routes.js')(app);
 
+io.sockets.on('connection', function (socket, pseudo) {
+    
+    socket.on('Utilisateur',function(data){
+     socket.emit('message',data);
+    });
 
-app.listen(3000, function () {
+});
+
+server.listen(3000, function () {
   console.log('Example app listening on port 3000!')
 })

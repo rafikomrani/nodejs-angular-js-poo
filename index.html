@@ -12,6 +12,34 @@
   label{
     text-align: left !important;
   }
+  .chat{
+    position: absolute;
+    bottom:0;
+    right: 0;
+    margin-right: 7%;
+    margin-bottom: 7%;
+    text-align: right;
+
+  }
+  .zone{
+    text-align: left;
+    background-color: #c4c4ef;
+    display: none;
+    border: 1px solid green;
+    border-radius: 5px;
+    width: 300px;
+    height: 400px;
+    padding: 5px 5px 5px 5px;
+
+  }
+ .zone >.form_chat{
+  position: absolute;
+    bottom: 10px;
+  }
+  
+  #img{
+    border: 2px solid green;
+  }
 </style>
 <link rel="stylesheet" href="/bootstrap/css/bootstrap.min.css">
 <link rel="stylesheet"  href="/font/css/font-awesome.css">
@@ -45,15 +73,43 @@
 <div ng-view>
 	
 </div>
+
 </div>
+<div class="chat">
+ <div class="zone">
+  <div class="msgs">
+    
+  </div>
+<div class="form_chat">
+<input type="text" id="msg" ><button class="btn btn-danger" id="send"><i class="fa fa-envelope">
+  </i></button>
+        </div>
+   </div>
+ 
+<img src="/img/mm.png" class="img-circle" id="img"  width="50" height="50"> 
+</div>
+
 <script src="/js/jquery.min.js"></script>
 <script src="/bootstrap/js/bootstrap.min.js"></script>
-
+<script src="/socket.io/socket.io.js"></script>
 <script src="node/angular/angular.min.js"></script>
 <script src="node/angular-route/angular-route.js"></script>
 <script src="frontend/model/User.js"></script>
 <script src="frontend/Controllers/app.js"></script>
 <script src="frontend/Controllers/UserController.js"></script>
-
+<script type="text/javascript">
+  $('#img').click(function(){
+  $('.zone').toggle('slide');
+  });
+  var socket = io.connect('http://localhost:3000');
+  $('#send').click(function(){
+    socket.emit('Utilisateur', $('#msg').val());
+    $('#msg').val('');
+  });
+  
+  socket.on('message',function(data){
+  $('.msgs').append('<p>'+data+'</p>');
+  });
+</script>
 </body>
 </html>
